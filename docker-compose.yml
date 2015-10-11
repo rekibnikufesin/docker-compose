@@ -1,0 +1,36 @@
+web:
+  build: ./web
+  ports:
+    - "3000:3000"
+  volumes:
+    - ./code/web:/srv/www/
+  command: node /srv/www/server.js
+  links:
+    - api
+    - redis
+    - mongodb
+    - elasticsearch
+
+api:
+  build: ./api
+  ports:
+    - "3030:3030"
+  volumes:
+    - ./code/api:/srv/www/
+  command: node /srv/www/server.js
+
+redis:
+  image: redis
+
+mongodb:
+  image: tutum/mongodb
+  ports:
+    - "27017:27017"
+  environment:
+    MONGODB_PASS: password
+
+elasticsearch:
+  image: elasticsearch
+  ports:
+    - "9200:9200"
+    - "9300:9300"
