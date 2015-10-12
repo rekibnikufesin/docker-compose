@@ -17,7 +17,7 @@ api:
     - "3030:3030"
   volumes:
     - ./code/api:/srv/www/
-  command: node /srv/www/server.js
+  command: bash -c "cd /srv/www && npm install && node /srv/www/server.js"
 
 redis:
   image: redis
